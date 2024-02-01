@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
 });
 route::resource('/Dashboard', RecipesController::class);
 Route::get('/dashboard', [RecipesController::class, 'displaybyuserid'])->name('dashboard');
+Route::get('/', [RecipesController::class, 'index'])->name('recipes.index');
+Route::get('/search',[RecipesController::class,'search']);
 
 
 require __DIR__.'/auth.php';

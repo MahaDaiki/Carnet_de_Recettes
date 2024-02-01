@@ -17,16 +17,31 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        $recipes = RecipesModel::latest()->paginate(5);
+        $recipes = RecipesModel::with('category', 'user')->latest()->paginate(6);
         return view('index',compact('recipes'))->with(request()->input('page'));
 
     }
     public function displaybyuserid()
 {
-    // Fetch recipes associated with the authenticated user's ID
-    $recipes = RecipesModel::where('user_id', auth()->id())->latest()->paginate(5);
+    // Fetch recipes associated with the  user's ID
+    $recipes = RecipesModel::where('user_id', auth()->id())->latest()->paginate(6);
     return view('Dashboard.dashboard', compact('recipes'));
 }
+
+public function search(Request $request){
+    $search = $request->search;
+    $recipes = RecipesModel::where(function($query) use ($search){
+        $query->where('title','like',"%$search%");
+       
+    })
+    ->orWhereHas('category',function($query) use($search){
+        $query->where('name','like',"%$search%");
+    })
+    ->paginate(6);
+    return view('index',compact('recipes','search'));
+}
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +63,8 @@ class RecipesController extends Controller
             'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'ingredients' => 'required',
-            'category_id' => 'nullable',
+            'instruction' => 'required',
+            'category_id' => 'required',
         ]);
     
         $data['user_id'] = Auth::id();
@@ -70,7 +86,7 @@ class RecipesController extends Controller
     
         $newrecipes = RecipesModel::create($data);
     
-        return redirect(route('dashboard'));
+        return redirect(route('dashboard'))->with('success', 'Recipe Added successfully');
     }
 
     /**
@@ -84,24 +100,66 @@ class RecipesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RecipesModel $RecipesModel)
+    public function edit($RecipesModel)
     {
-        //
+        $Recipes = RecipesModel::find($RecipesModel);
+        $categories = Categories::all();
+        return view('Dashboard.edit' ,compact('categories', 'Recipes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RecipesModel $RecipesModel)
+    public function update(Request $request,  $recipe)
     {
-        //
+        $recipe =  RecipesModel::find($recipe);
+        $data = $request->validate([
+            'title' => 'required',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',
+            'ingredients' => 'required',
+            'instruction' => 'required',
+            'category_id' => 'required',
+        ]);
+    
+        $data['user_id'] = Auth::id();
+        if ($request->hasFile('image')) {
+            $uploadedImage = $request->file('image');
+            
+            // Generate a unique filename for the new image
+            $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
+        
+            // Store the new image in the storage directory
+            $imagePath = $uploadedImage->storeAs('public/images', $imageName);
+        
+            // Move the new image from storage to public/images
+            File::move(storage_path('app/' . $imagePath), public_path('images/' . $imageName));
+        
+            // Update the image path to store the correct URL in the database
+            $data['image'] = 'images/' . $imageName;
+    
+            // Remove the old image file if it exists
+            if ($recipe->image) {
+                File::delete(public_path($recipe->image));
+            }
+        } else {
+            // Keep the old image path if a new image is not provided
+            $data['image'] = $recipe->image;
+        }
+    
+        $recipe->update($data);
+    
+        return redirect(route('dashboard'))->with('success', 'Recipe modified successfully');
+    
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RecipesModel $RecipesModel)
+    public function destroy($RecipesModel)
     {
-        //
+        $Recipes = RecipesModel::find($RecipesModel);
+        $Recipes->delete();
+        return redirect()->route('dashboard')->with('success', 'Product Deleted Successfully');
+
     }
 }

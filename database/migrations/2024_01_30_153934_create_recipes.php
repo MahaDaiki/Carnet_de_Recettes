@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('image'); 
             $table->text('ingredients'); 
+            $table->text('instruction');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             
