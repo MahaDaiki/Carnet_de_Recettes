@@ -158,7 +158,11 @@
                     </div>
     
                     <div class="mt-4">
-                      {{ $recipes->links() }}
+                      <nav aria-label="Page navigation">
+                          <ul class="pagination justify-content-center">
+                              {{ $recipes->links() }}
+                          </ul>
+                      </nav>
                   </div>
                 </div>
             </section>
@@ -167,7 +171,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="recipeModalLabel"></h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                            <button type="button" class="btn-close btn btn-primary more-details-button" data-dismiss="modal" aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
                             <img src="" id="recipeImage" class="img-fluid mb-2" alt="Recipe Image">
