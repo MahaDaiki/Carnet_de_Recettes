@@ -32,7 +32,7 @@
             <div>
                 <a  class="  text-center" href="/">
                     <div class="col-md-12  heading-section ftco-animate">
-                        <span class="subheading">Recipes</span>
+                        <span class="subheading">Recipe</span>
                       <h2 class="mb-4">Book</h2>
                     </div>
                 </a>

@@ -49,9 +49,6 @@
                 @endforeach
             </div>
             
-            <div class="mt-4">
-                {{ $recipes->links() }}
-            </div>
         </div>
     </div>
 </x-app-layout>

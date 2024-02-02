@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="/">Recipes Book</a>
+                    <a href="/">Recipe Book</a>
                     <a href="{{ route('dashboard') }}">
                     </a>
                     

@@ -24,7 +24,7 @@ class RecipesController extends Controller
     public function displaybyuserid()
 {
     // Fetch recipes associated with the  user's ID
-    $recipes = RecipesModel::where('user_id', auth()->id())->latest()->paginate(6);
+    $recipes = RecipesModel::where('user_id', auth()->id())->latest()->get();
     return view('Dashboard.dashboard', compact('recipes'));
 }
 

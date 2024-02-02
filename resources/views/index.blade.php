@@ -29,7 +29,7 @@
          
                   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
                     <div class="container">
-                      <a class="navbar-brand" href="index.html">RecipesBook</a>
+                      <a class="navbar-brand" href="/">RecipeBook</a>
                       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="oi oi-menu"></span> Menu
                       </button>
@@ -62,7 +62,7 @@
                       <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
             
                         <div class="col-md-12 col-sm-12 text-center ftco-animate">
-                            <span class="subheading">Recipes Book</span>
+                            <span class="subheading">Recipe Book</span>
                           <h1 class="mb-4">Best Recipes</h1>
                         </div>
             
@@ -76,7 +76,7 @@
                       <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
             
                         <div class="col-md-12 col-sm-12 text-center ftco-animate">
-                            <span class="subheading">Recipes Book</span>
+                            <span class="subheading">Recipe Book</span>
                           <h1 class="mb-4">Nutritious &amp; Tasty</h1>
                         </div>
             
@@ -90,7 +90,7 @@
                       <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
             
                         <div class="col-md-12 col-sm-12 text-center ftco-animate">
-                            <span class="subheading">Recipes Book</span>
+                            <span class="subheading">Recipe Book</span>
                           <h1 class="mb-4">Delicious Specialties</h1>
                         </div>
             
@@ -109,7 +109,7 @@
                     <div class="container">
                         <div class="row no-gutters justify-content-center mb-5 pb-2">
                       <div class="col-md-12 text-center heading-section ftco-animate">
-                          <span class="subheading">Recipes</span>
+                          <span class="subheading">Recipe</span>
                         <h2 class="mb-4">Book</h2>
                       </div>
                     </div>
@@ -117,7 +117,7 @@
             <div class="col-md-6">
                 <form action="/search" method="GET" class="search-form">
                   <div class="input-group">
-                    <input type="text" class="form-control rounded" placeholder="Search recipes..." name="search" value="{{ isset($search) ? $search : '' }}">
+                    <input type="text" class="form-control rounded" placeholder="Search recipe..." name="search" value="{{ isset($search) ? $search : '' }}">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary rounded-right">Search</button>
                     </div>
@@ -192,7 +192,7 @@
                     <div class="row mb-5">
                       <div class="col-md-6 col-lg-3">
                         <div class="ftco-footer-widget mb-4">
-                          <h2 class="ftco-heading-2">Recipes Book</h2>
+                          <h2 class="ftco-heading-2">Recipe Book</h2>
                           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                           <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
