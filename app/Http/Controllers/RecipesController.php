@@ -70,19 +70,14 @@ public function search(Request $request){
         $data['user_id'] = Auth::id();
         if ($request->hasFile('image')) {
             $uploadedImage = $request->file('image');
-            
-            // Generate a unique filename for the image
+        
             $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
         
-            // Store the image in the storage directory
             $imagePath = $uploadedImage->storeAs('public/images', $imageName);
-        
-            // Move the image from storage to public/images
             File::move(storage_path('app/' . $imagePath), public_path('images/' . $imageName));
-        
-            // Update the image path to store the correct URL in the database
             $data['image'] = 'images/' . $imageName;
         }
+       
     
         $newrecipes = RecipesModel::create($data);
     
@@ -125,24 +120,24 @@ public function search(Request $request){
         if ($request->hasFile('image')) {
             $uploadedImage = $request->file('image');
             
-            // Generate a unique filename for the new image
+            
             $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
         
-            // Store the new image in the storage directory
+          
             $imagePath = $uploadedImage->storeAs('public/images', $imageName);
         
-            // Move the new image from storage to public/images
+           
             File::move(storage_path('app/' . $imagePath), public_path('images/' . $imageName));
         
-            // Update the image path to store the correct URL in the database
+          
             $data['image'] = 'images/' . $imageName;
     
-            // Remove the old image file if it exists
+       
             if ($recipe->image) {
                 File::delete(public_path($recipe->image));
             }
         } else {
-            // Keep the old image path if a new image is not provided
+           
             $data['image'] = $recipe->image;
         }
     

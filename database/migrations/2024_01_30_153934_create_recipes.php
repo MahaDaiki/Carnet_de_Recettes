@@ -28,6 +28,8 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     * php artisan make:migration update_recipes
+     * $table->enum('category', array('Breakfast','Lunch.','Dinner'));
      */
     public function down(): void
     {
